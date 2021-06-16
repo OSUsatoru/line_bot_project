@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, request, abort
 
 from linebot import (
@@ -7,10 +9,12 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, MessageAction, PostbackAction, URIAction
+    MessageEvent, TextMessage,
+    TemplateSendMessage, ButtonsTemplate, MessageAction,
+    PostbackAction, URIAction
 )
 
-import os
+
 
 app = Flask(__name__)
 

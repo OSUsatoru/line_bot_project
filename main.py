@@ -69,7 +69,10 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         #TextSendMessage(text=event.message.text))
-        TextSendMessage(text=buttons_template_message))
+        #TextSendMessage(text="test")
+        buttons_template_message
+        )
+
 
 
 if __name__ == "__main__":

@@ -9,6 +9,7 @@ from linebot.exceptions import (
     LineBotApiError, InvalidSignatureError
 )
 from linebot.models import (
+    TemplateSendMessage,
     MessageEvent, TextMessage, TextSendMessage,MessageAction,
     ButtonsTemplate,  URIAction,
     PostbackAction, )
@@ -56,7 +57,8 @@ def handle_message(event):
                 PostbackAction(label='ping with text', data='ping', text='ping'),
                 MessageAction(label='Translate Rice', text='米')
             ])
-        line_bot_api.reply_message(event.reply_token, buttons_template)
+        template_message = TemplateSendMessage(alt_text='Buttons alt text', template=buttons_template)
+        line_bot_api.reply_message(event.reply_token, template_message)
 
 
 

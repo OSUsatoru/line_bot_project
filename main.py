@@ -9,6 +9,7 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
+    TextSendMessage,
     MessageEvent, TextMessage,
     TemplateSendMessage,
      ImageCarouselTemplate, ImageCarouselColumn,
@@ -46,36 +47,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    image_carousel_template_message = TemplateSendMessage(
-        alt_text='ImageCarousel template',
-        template=ImageCarouselTemplate(
-            columns=[
-                ImageCarouselColumn(
-                    image_url='https://example.com/item1.jpg',
-                    action=PostbackAction(
-                        label='postback1',
-                        display_text='postback text1',
-                        data='action=buy&itemid=1'
-                    )
-                ),
-                ImageCarouselColumn(
-                    image_url='https://example.com/item2.jpg',
-                    action=PostbackAction(
-                        label='postback2',
-                        display_text='postback text2',
-                        data='action=buy&itemid=2'
-                    )
-                )
-            ]
-        )
-    )
+    text=event.message.text
+    if text != "A":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text))
 
-    line_bot_api.reply_message(
-        event.reply_token,
-        #TextSendMessage(text=event.message.text))
-        #TextSendMessage(text="test")
-        image_carousel_template_message
-        )
+
 
 
 

@@ -57,25 +57,25 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    buttons_template_message = TemplateSendMessage(
-        alt_text='Buttons template',
-        template=ButtonsTemplate(
-            thumbnail_image_url='https://example.com/image.jpg',
-            title='Menu',
-            text='Please select',
-            actions=[
-                PostbackAction(
-                    label='postback',
-                    display_text='postback text',
-                    data='action=buy&itemid=1'
+    image_carousel_template_message = TemplateSendMessage(
+        alt_text='ImageCarousel template',
+        template=ImageCarouselTemplate(
+            columns=[
+                ImageCarouselColumn(
+                    image_url='https://example.com/item1.jpg',
+                    action=PostbackAction(
+                        label='postback1',
+                        display_text='postback text1',
+                        data='action=buy&itemid=1'
+                    )
                 ),
-                MessageAction(
-                    label='message',
-                    text='message text'
-                ),
-                URIAction(
-                    label='uri',
-                    uri='http://example.com/'
+                ImageCarouselColumn(
+                    image_url='https://example.com/item2.jpg',
+                    action=PostbackAction(
+                        label='postback2',
+                        display_text='postback text2',
+                        data='action=buy&itemid=2'
+                    )
                 )
             ]
         )
@@ -85,7 +85,7 @@ def handle_message(event):
         event.reply_token,
         #TextSendMessage(text=event.message.text))
         #TextSendMessage(text="test")
-        buttons_template_message
+        image_carousel_template_message
         )
 
 
